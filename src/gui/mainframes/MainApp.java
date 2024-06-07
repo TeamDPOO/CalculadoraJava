@@ -154,7 +154,7 @@ public class MainApp extends JFrame {
 		JButton ceroBtn = new JButton("0");
 		ceroBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				display.setText("0");
+				display.setText(display.getText()+"0");
 			}
 		});
 		ceroBtn.setFont(new Font("SansSerif", Font.PLAIN, 11));
@@ -209,7 +209,6 @@ public class MainApp extends JFrame {
 		controlPanel.add(igualBtn);
 		
 		JButton borrarBtn = new JButton("<-");
-		//borrarBtn.setIcon(new ImageIcon("F:\\Inform\u00E1tica\\1er a\u00F1o\\2do Semestre\\DPOO\\Proyectos\\Calculadora\\src\\gui\\utils\\25426.png"));
 		sl_controlPanel.putConstraint(SpringLayout.NORTH, borrarBtn, -39, SpringLayout.NORTH, sieteBtn);
 		sl_controlPanel.putConstraint(SpringLayout.WEST, borrarBtn, 0, SpringLayout.WEST, sieteBtn);
 		sl_controlPanel.putConstraint(SpringLayout.SOUTH, borrarBtn, -5, SpringLayout.NORTH, sieteBtn);
