@@ -4,16 +4,17 @@ package logica;
 import logica.Operacion;
 
 public class Entrada {
-
-	private String display;
+	
+	private Operacion operacion;
+	private int posicion;
 	
 	public Entrada(String display) {
 		super();
-		this.display = display;
+		this.posicion = validacion(display);
+		this.operacion = resultado(posicion, display);
 	}
 
-
-	public int validacion(){
+	public int validacion(String display){
 		boolean parada=true;
 		int i=1;
 		
@@ -28,7 +29,7 @@ public class Entrada {
 	// puedes invocar este metodo dentro del metodo de resultado xq si es -1 quiere decir que hay division x cero
 	}
 	
-	public Operacion resultado(int i){
+	public Operacion resultado(int i, String display){
 		
 		double num1=0;
 		double num2=0;
