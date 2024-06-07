@@ -9,7 +9,6 @@ public class Entrada {
 	private int posicion;
 	
 	public Entrada(String display) {
-		super();
 		this.posicion = validacion(display);
 		this.operacion = resultado(posicion, display);
 	}
@@ -33,9 +32,9 @@ public class Entrada {
 		
 		double num1=0;
 		double num2=0;
-		char operador;
+		char operador='+';
 		
-		if(i!=display.length()){
+		if(i!=display.length() && i!=-1){
 			
 			String snum1=display.substring(0, i-1);
 			num1=Double.parseDouble(snum1);
