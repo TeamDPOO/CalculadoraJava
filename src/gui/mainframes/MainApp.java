@@ -47,6 +47,8 @@ import java.awt.event.ActionEvent;
 public class MainApp extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField inOutDisplay;
+	private JTextField displayPreview;
 	private JTextField display;
 
 	/**
@@ -55,7 +57,7 @@ public class MainApp extends JFrame {
 	public MainApp() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 276, 316);
+		setBounds(100, 100, 275, 303);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaption);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -69,16 +71,25 @@ public class MainApp extends JFrame {
 		mainPanel.setLayout(null);
 		
 		display = new JTextField();
-		display.setFont(new Font("SansSerif", Font.PLAIN, 25));
-		display.setBackground(new Color(230, 230, 250));
+		display.setEditable(false);
 		display.setHorizontalAlignment(SwingConstants.RIGHT);
-		display.setBounds(0, 0, 250, 50);
-		mainPanel.add(display);
+		display.setFont(new Font("SansSerif", Font.PLAIN, 25));
 		display.setColumns(10);
+		display.setBackground(new Color(230, 230, 250));
+		display.setBounds(0, 0, 250, 24);
+		mainPanel.add(display);
+		
+		inOutDisplay = new JTextField();
+		inOutDisplay.setBounds(0, 20, 250, 30);
+		mainPanel.add(inOutDisplay);
+		inOutDisplay.setFont(new Font("SansSerif", Font.PLAIN, 25));
+		inOutDisplay.setBackground(new Color(230, 230, 250));
+		inOutDisplay.setHorizontalAlignment(SwingConstants.RIGHT);
+		inOutDisplay.setColumns(10);
 		
 		JPanel controlPanel = new JPanel();
 		controlPanel.setBackground(new Color(230, 230, 250));
-		controlPanel.setBounds(10, 72, 250, 194);
+		controlPanel.setBounds(10, 72, 250, 195);
 		contentPane.add(controlPanel);
 		SpringLayout sl_controlPanel = new SpringLayout();
 		controlPanel.setLayout(sl_controlPanel);
@@ -154,7 +165,7 @@ public class MainApp extends JFrame {
 		JButton ceroBtn = new JButton("0");
 		ceroBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				display.setText(display.getText()+"0");
+				inOutDisplay.setText(inOutDisplay.getText()+"0");
 			}
 		});
 		ceroBtn.setFont(new Font("SansSerif", Font.PLAIN, 11));
@@ -221,5 +232,7 @@ public class MainApp extends JFrame {
 		sl_controlPanel.putConstraint(SpringLayout.SOUTH, limpiarDisplayBtn, -6, SpringLayout.NORTH, nueveBtn);
 		sl_controlPanel.putConstraint(SpringLayout.EAST, limpiarDisplayBtn, 47, SpringLayout.EAST, borrarBtn);
 		controlPanel.add(limpiarDisplayBtn);
+		
+		
 	}
 }
