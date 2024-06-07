@@ -53,5 +53,23 @@ public class Entrada {
 		
 		return operacion;
 	}
+
+	public Operacion getOperacion() {
+		return operacion;
+	}
+
+	public void setOperacion(Operacion operacion) {
+		this.operacion = operacion;
+	}
+
+	public int getPosicion() {
+		return posicion;
+	}
+
+	public void setPosicion(int posicion) {
+		this.posicion = posicion;
+	}
+	
+	
 	
 }
