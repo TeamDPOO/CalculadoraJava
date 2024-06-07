@@ -7,7 +7,6 @@ public class Operacion {
 	private char operador;
 	
 	public Operacion(double num1, double num2, char operador) {
-		super();
 		this.num1 = num1;
 		this.num2 = num2;
 		this.operador = operador;
