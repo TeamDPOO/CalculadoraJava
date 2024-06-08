@@ -1,6 +1,7 @@
 package gui.mainframes;
 
 import gui.dialogs.MensajesDeDialogo;
+
 import gui.utils.Definiciones;
 
 import java.awt.BorderLayout;
@@ -336,7 +337,7 @@ public class MainApp extends JFrame {
 				String aux = display.getText().concat(inOutDisplay.getText());
 				Entrada entrada = new Entrada(aux); 			
 				//Mostrar resultado de la logica
-				if(entrada.getPosicion()== -1){
+				if(entrada.getPosicion() == -1){
 					inOutDisplay.setText("Error!!! División por cero");
 				}
 				//display.setText(aux+"=");
