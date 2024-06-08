@@ -1,6 +1,5 @@
 package logica;
 
-//import java.lang.Float;
 import logica.Operacion;
 
 public class Entrada {
@@ -20,12 +19,12 @@ public class Entrada {
 		while(i<display.length() && parada){
 			if(!Character.isDigit(display.charAt(i)) && display.charAt(i)!='.'){
 				parada=false;
-			}	
+			}
+			i++;
 		}
 		if(display.charAt(i)=='/' && display.substring(i+1).equals("0"));
 			i=-1;
 	return i;
-	// puedes invocar este metodo dentro del metodo de resultado xq si es -1 quiere decir que hay division x cero
 	}
 	
 	public Operacion resultado(int i, String display){
@@ -39,7 +38,7 @@ public class Entrada {
 			String snum1=display.substring(0, i-1);
 			num1=Double.parseDouble(snum1);
 			
-			String snum2=display.substring(i, i-1);
+			String snum2=display.substring(i+1, display.length());
 			num2=Double.parseDouble(snum2);
 			
 			operador=display.charAt(i);

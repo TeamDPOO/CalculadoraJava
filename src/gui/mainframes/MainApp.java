@@ -48,6 +48,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Point;
 import java.awt.Toolkit;
+import logica.*;
 
 public class MainApp extends JFrame {
 
@@ -333,12 +334,13 @@ public class MainApp extends JFrame {
 		igualBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String aux = display.getText().concat(inOutDisplay.getText());
-				/*
-				 * Pasar String concatenado a logica (Jorge...aquí es donde entras tu...XD)
-				 */
+				Entrada entrada = new Entrada(aux); 			
 				//Mostrar resultado de la logica
-				display.setText(aux+"=");
-				inOutDisplay.setText("(Resultado)");
+				if(entrada.getPosicion()== -1){
+					inOutDisplay.setText("Error!!! División por cero");
+				}
+				//display.setText(aux+"=");
+				//inOutDisplay.setText("(Resultado)");
 				Definiciones.operador = false;
 				
 			}
