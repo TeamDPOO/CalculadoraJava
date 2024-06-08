@@ -68,12 +68,11 @@ public class MainApp extends JFrame {
 	}
 	
 	public void escribirNum(String btn){
-		if(inOutDisplay.getText().equals("0") || Definiciones.nuevoNum){
+		if(inOutDisplay.getText().equals("0") || Definiciones.operador){
 			inOutDisplay.setText(btn);
-			Definiciones.nuevoNum = false;
+			Definiciones.operador = false;
 		}else{
 			inOutDisplay.setText(inOutDisplay.getText()+ btn);
-			Definiciones.nuevoNum = true;
 		}
 	}
 	
@@ -239,17 +238,13 @@ public class MainApp extends JFrame {
 		tresBtn.setFont(new Font("SansSerif", Font.PLAIN, 11));
 		controlPanel.add(tresBtn);
 		
-		JButton ceroBtn = new JButton("0");
+		final JButton ceroBtn = new JButton("0");
 		sl_controlPanel.putConstraint(SpringLayout.SOUTH, unoBtn, -2, SpringLayout.NORTH, ceroBtn);
 		sl_controlPanel.putConstraint(SpringLayout.EAST, ceroBtn, 0, SpringLayout.EAST, ochoBtn);
 		sl_controlPanel.putConstraint(SpringLayout.WEST, ceroBtn, 0, SpringLayout.WEST, sieteBtn);
 		ceroBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(inOutDisplay.getText().length() < 16){
-					if(!inOutDisplay.getText().equals("0")){
-						inOutDisplay.setText(inOutDisplay.getText()+"0");
-					}
-				}		
+				validarEntrada(ceroBtn.getText());
 			}
 		});
 		ceroBtn.setFont(new Font("SansSerif", Font.PLAIN, 11));
@@ -261,6 +256,7 @@ public class MainApp extends JFrame {
 				if(!Definiciones.operador){
 					display.setText(inOutDisplay.getText() + "+");
 					Definiciones.operador = true;
+					Definiciones.cantPuntoFlotante = 0;
 				}else{
 					MensajesDeDialogo.masDeUnaOperacion();
 				}
@@ -280,6 +276,7 @@ public class MainApp extends JFrame {
 				if(!Definiciones.operador){
 					display.setText(inOutDisplay.getText() + "-");
 					Definiciones.operador = true;
+					Definiciones.cantPuntoFlotante = 0;
 				}else{
 					MensajesDeDialogo.masDeUnaOperacion();
 				}
@@ -298,6 +295,7 @@ public class MainApp extends JFrame {
 				if(!Definiciones.operador){
 					display.setText(inOutDisplay.getText() + "*");
 					Definiciones.operador = true;
+					Definiciones.cantPuntoFlotante = 0;
 				}else{
 					MensajesDeDialogo.masDeUnaOperacion();
 				}
@@ -316,6 +314,7 @@ public class MainApp extends JFrame {
 				if(!Definiciones.operador){
 					display.setText(inOutDisplay.getText() + "/");
 					Definiciones.operador = true;
+					Definiciones.cantPuntoFlotante = 0;
 				}else{
 					MensajesDeDialogo.masDeUnaOperacion();
 				}
@@ -369,6 +368,7 @@ public class MainApp extends JFrame {
 					inOutDisplay.setText(aux);
 				}else{
 					inOutDisplay.setText("0");
+					Definiciones.cantPuntoFlotante = 0;
 				}
 			}
 		});
@@ -378,6 +378,7 @@ public class MainApp extends JFrame {
 		limpiarInOutDisplayBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				inOutDisplay.setText("0");
+				Definiciones.cantPuntoFlotante = 0;
 			}
 		});
 		sl_controlPanel.putConstraint(SpringLayout.NORTH, limpiarInOutDisplayBtn, 9, SpringLayout.NORTH, controlPanel);
@@ -392,6 +393,7 @@ public class MainApp extends JFrame {
 				inOutDisplay.setText("0");
 				display.setText("");
 				Definiciones.operador = false;
+				Definiciones.cantPuntoFlotante = 0;
 			}
 		});
 		sl_controlPanel.putConstraint(SpringLayout.WEST, limpiarInOutDisplayBtn, 6, SpringLayout.EAST, cleanBtn);
