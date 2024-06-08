@@ -100,8 +100,8 @@ public class MainApp extends JFrame {
 		mainPanel.setLayout(null);
 		
 		display = new JTextField();
-		display.setForeground(SystemColor.textInactiveText);
 		display.setEditable(false);
+		display.setForeground(SystemColor.textInactiveText);
 		display.setHorizontalAlignment(SwingConstants.RIGHT);
 		display.setFont(new Font("SansSerif", Font.PLAIN, 20));
 		display.setColumns(10);
