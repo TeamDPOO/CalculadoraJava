@@ -71,6 +71,8 @@ public class MainApp extends JFrame {
 		if(inOutDisplay.getText().equals("0") || Definiciones.operador){
 			inOutDisplay.setText(btn);
 			Definiciones.operador = false;
+			Definiciones.nuevoNum = true;
+			Definiciones.cantPuntoFlotante = 0;
 		}else{
 			inOutDisplay.setText(inOutDisplay.getText()+ btn);
 		}
@@ -255,8 +257,7 @@ public class MainApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(!Definiciones.operador){
 					display.setText(inOutDisplay.getText() + "+");
-					Definiciones.operador = true;
-					Definiciones.cantPuntoFlotante = 0;
+					Definiciones.operador = true;				
 				}else{
 					MensajesDeDialogo.masDeUnaOperacion();
 				}
@@ -364,6 +365,9 @@ public class MainApp extends JFrame {
 		borrarBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!inOutDisplay.getText().isEmpty() && inOutDisplay.getText().length() != 1){
+					if(inOutDisplay.getText().charAt(inOutDisplay.getText().length()-1) == '.'){
+						Definiciones.cantPuntoFlotante = 0;
+					}					
 					String aux = inOutDisplay.getText().substring(0, inOutDisplay.getText().length()-1);
 					inOutDisplay.setText(aux);
 				}else{
@@ -408,7 +412,7 @@ public class MainApp extends JFrame {
 		puntoBtn.setFont(new Font("SansSerif", Font.PLAIN, 20));
 		puntoBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(Definiciones.cantPuntoFlotante == 0){
+				if(Definiciones.cantPuntoFlotante == 0 && Definiciones.nuevoNum){
 					inOutDisplay.setText(inOutDisplay.getText()+".");
 					Definiciones.cantPuntoFlotante++;
 				}
