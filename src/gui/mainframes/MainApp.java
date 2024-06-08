@@ -339,6 +339,9 @@ public class MainApp extends JFrame {
 				//Mostrar resultado de la logica
 				if(entrada.getPosicion() == -1){
 					inOutDisplay.setText("Error!!! División por cero");
+				}else{
+					inOutDisplay.setText(Double.toString(entrada.getOperacion().controlador()));
+					//inOutDisplay.setText(Double.toString(entrada.getPosicion()));
 				}
 				//display.setText(aux+"=");
 				//inOutDisplay.setText("(Resultado)");
