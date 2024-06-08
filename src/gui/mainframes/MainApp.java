@@ -1,7 +1,6 @@
 package gui.mainframes;
 
 import gui.dialogs.MensajesDeDialogo;
-
 import gui.utils.Definiciones;
 
 import java.awt.BorderLayout;
@@ -49,6 +48,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Point;
 import java.awt.Toolkit;
+
 import logica.*;
 
 public class MainApp extends JFrame {
@@ -335,7 +335,8 @@ public class MainApp extends JFrame {
 		igualBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String aux = display.getText().concat(inOutDisplay.getText());
-				Entrada entrada = new Entrada(aux); 			
+				Entrada entrada = new Entrada(aux);
+				
 				//Mostrar resultado de la logica
 				if(entrada.getPosicion() == -1){ 
 					inOutDisplay.setText("Error!!! División por cero");

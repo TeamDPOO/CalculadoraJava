@@ -36,7 +36,7 @@ public class Entrada {
 		double num2=0;
 		char operador='+';
 		
-		if(i!=-1 && i!=display.length()){
+		if(i!=-1 && i!=display.length()-1){
 			int a=i;
 			if(a==1){
 				String snum1=""+display.charAt(0);
@@ -56,7 +56,8 @@ public class Entrada {
 			}
 			
 			operador=display.charAt(i);
-		}else if(i==display.length()){
+		}
+		else if(i==display.length()-1){
 			num1=Double.parseDouble(display);
 		}
 		
