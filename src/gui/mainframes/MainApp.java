@@ -337,14 +337,17 @@ public class MainApp extends JFrame {
 				String aux = display.getText().concat(inOutDisplay.getText());
 				Entrada entrada = new Entrada(aux); 			
 				//Mostrar resultado de la logica
-				if(entrada.getPosicion() == -1){
+				if(entrada.getPosicion() == -1){ 
 					inOutDisplay.setText("Error!!! División por cero");
 				}else{
-					inOutDisplay.setText(Double.toString(entrada.getOperacion().controlador()));
-					//inOutDisplay.setText(Double.toString(entrada.getPosicion()));
+					
+					if(entrada.getOperacion().controlador() - (int)entrada.getOperacion().controlador() ==0){
+						inOutDisplay.setText(Integer.toString((int)(entrada.getOperacion().controlador())));
+					}else{
+						inOutDisplay.setText(Double.toString(entrada.getOperacion().controlador()));
+					}
 				}
-				//display.setText(aux+"=");
-				//inOutDisplay.setText("(Resultado)");
+				
 				Definiciones.operador = false;
 				
 			}

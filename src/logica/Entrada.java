@@ -13,6 +13,7 @@ public class Entrada {
 		this.operacion = resultado(posicion, display);
 	}
 
+	//Devuelve -1 si hay division x cero y si no la posicion del operador
 	public int validacion(String display){
 		boolean parada=true;
 		int i=1;
@@ -28,6 +29,7 @@ public class Entrada {
 	return i-1;
 	}
 	
+	//Crea a Operacion con sus numeros y su operador
 	public Operacion resultado(int i, String display){
 		
 		double num1=0;
@@ -37,8 +39,6 @@ public class Entrada {
 		if(i!=-1 && i!=display.length()){
 			int a=i;
 			if(a==1){
-				
-				//String snum1=String.valueOf(display.charAt(0));
 				String snum1=""+display.charAt(0);
 				num1=Double.parseDouble(snum1);
 			}else{
@@ -48,7 +48,6 @@ public class Entrada {
 			
 			a=display.length()-i+1;
 			if(a==1){
-				//String snum2=String.valueOf(display.charAt(i+1));
 				String snum2="0"+display.charAt(i+1);
 				num2=Double.parseDouble(snum2);
 			}else{
@@ -57,6 +56,8 @@ public class Entrada {
 			}
 			
 			operador=display.charAt(i);
+		}else if(i==display.length()){
+			num1=Double.parseDouble(display);
 		}
 		
 		Operacion operacion = new Operacion(num1, num2, operador);
