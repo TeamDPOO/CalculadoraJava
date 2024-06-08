@@ -33,7 +33,7 @@ public class Entrada {
 		double num2=0;
 		char operador='+';
 		
-		if(i!=display.length() && i!=-1){
+		if(i!=display.length() || i!=-1){
 			
 			String snum1=display.substring(0, i-1);
 			num1=Double.parseDouble(snum1);
