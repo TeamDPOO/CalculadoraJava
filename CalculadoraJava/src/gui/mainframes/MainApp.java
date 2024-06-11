@@ -1,0 +1,496 @@
+package gui.mainframes;
+
+import gui.dialogs.MensajesDeDialogo;
+import gui.utils.Definiciones;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.Color;
+import java.awt.SystemColor;
+
+import javax.swing.border.BevelBorder;
+import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import java.awt.Component;
+import java.awt.Font;
+
+import javax.swing.JButton;
+
+import javax.swing.SpringLayout;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import logica.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class MainApp extends JFrame {
+
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField inOutDisplay;
+	private JTextField display;
+	
+	/**
+	 * Crea el frame.
+	 */
+	public MainApp() {
+		setTitle("Calculadora");
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 304, 333);
+		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.inactiveCaption);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel mainPanel = new JPanel();
+		mainPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		mainPanel.setBounds(10, 11, 278, 50);
+		contentPane.add(mainPanel);
+		mainPanel.setLayout(null);
+		
+		display = new JTextField();
+		display.setForeground(SystemColor.textInactiveText);
+		display.setEditable(false);
+		display.setHorizontalAlignment(SwingConstants.RIGHT);
+		display.setFont(new Font("SansSerif", Font.PLAIN, 20));
+		display.setColumns(10);
+		display.setBackground(new Color(230, 230, 250));
+		display.setBounds(0, 0, 278, 24);
+		mainPanel.add(display);
+		
+		inOutDisplay = new JTextField();
+		inOutDisplay.setEditable(false);
+		inOutDisplay.setBounds(0, 22, 278, 29);
+		mainPanel.add(inOutDisplay);
+		inOutDisplay.setFont(new Font("SansSerif", Font.PLAIN, 25));
+		inOutDisplay.setBackground(new Color(230, 230, 250));
+		inOutDisplay.setHorizontalAlignment(SwingConstants.RIGHT);
+		inOutDisplay.setColumns(10);
+		inOutDisplay.setText("0");
+		
+		JPanel controlPanel = new JPanel();
+		controlPanel.setBackground(new Color(230, 230, 250));
+		controlPanel.setBounds(10, 72, 278, 221);
+		contentPane.add(controlPanel);
+		SpringLayout sl_controlPanel = new SpringLayout();
+		controlPanel.setLayout(sl_controlPanel);
+		
+		//Creacion de botones y asignacion de sus acciones
+		final JButton sieteBtn = new JButton("7");
+		sieteBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				validarEntrada(sieteBtn.getText());
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, sieteBtn, 83, SpringLayout.NORTH, controlPanel);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, sieteBtn, 55, SpringLayout.WEST, controlPanel);
+		sieteBtn.setFont(new Font("SansSerif", Font.PLAIN, 11));
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, sieteBtn, 49, SpringLayout.NORTH, controlPanel);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, sieteBtn, 10, SpringLayout.WEST, controlPanel);
+		controlPanel.add(sieteBtn);
+		
+		final JButton ochoBtn = new JButton("8");
+		ochoBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				validarEntrada(ochoBtn.getText());
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, ochoBtn, 0, SpringLayout.NORTH, sieteBtn);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, ochoBtn, 6, SpringLayout.EAST, sieteBtn);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, ochoBtn, -138, SpringLayout.SOUTH, controlPanel);
+		ochoBtn.setFont(new Font("SansSerif", Font.PLAIN, 11));
+		controlPanel.add(ochoBtn);
+		
+		final JButton nueveBtn = new JButton("9");
+		nueveBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				validarEntrada(nueveBtn.getText());	
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.WEST, nueveBtn, 112, SpringLayout.WEST, controlPanel);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, ochoBtn, -6, SpringLayout.WEST, nueveBtn);
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, nueveBtn, 0, SpringLayout.NORTH, sieteBtn);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, nueveBtn, 0, SpringLayout.SOUTH, sieteBtn);
+		nueveBtn.setFont(new Font("SansSerif", Font.PLAIN, 11));
+		controlPanel.add(nueveBtn);
+		
+		final JButton cuatroBtn = new JButton("4");
+		cuatroBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				validarEntrada(cuatroBtn.getText());
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, cuatroBtn, 2, SpringLayout.SOUTH, sieteBtn);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, cuatroBtn, 10, SpringLayout.WEST, controlPanel);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, cuatroBtn, -102, SpringLayout.SOUTH, controlPanel);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, cuatroBtn, 0, SpringLayout.EAST, sieteBtn);
+		cuatroBtn.setFont(new Font("SansSerif", Font.PLAIN, 11));
+		controlPanel.add(cuatroBtn);
+		
+		final JButton cincoBtn = new JButton("5");
+		cincoBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				validarEntrada(cincoBtn.getText());
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, cincoBtn, 2, SpringLayout.SOUTH, ochoBtn);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, cincoBtn, -102, SpringLayout.SOUTH, controlPanel);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, cincoBtn, 0, SpringLayout.EAST, ochoBtn);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, cincoBtn, 0, SpringLayout.WEST, ochoBtn);
+		cincoBtn.setFont(new Font("SansSerif", Font.PLAIN, 11));
+		controlPanel.add(cincoBtn);
+		
+		final JButton seisBtn = new JButton("6");
+		seisBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				validarEntrada(seisBtn.getText());
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, seisBtn, 2, SpringLayout.SOUTH, nueveBtn);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, seisBtn, 0, SpringLayout.WEST, nueveBtn);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, seisBtn, 0, SpringLayout.EAST, nueveBtn);
+		seisBtn.setFont(new Font("SansSerif", Font.PLAIN, 11));
+		controlPanel.add(seisBtn);
+		
+		final JButton unoBtn = new JButton("1");
+		unoBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				validarEntrada(unoBtn.getText());	
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, unoBtn, 2, SpringLayout.SOUTH, cuatroBtn);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, unoBtn, 0, SpringLayout.WEST, sieteBtn);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, unoBtn, 45, SpringLayout.WEST, sieteBtn);
+		unoBtn.setFont(new Font("SansSerif", Font.PLAIN, 11));
+		controlPanel.add(unoBtn);
+		
+		final JButton dosBtn = new JButton("2");
+		dosBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				validarEntrada(dosBtn.getText());
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, dosBtn, 121, SpringLayout.NORTH, controlPanel);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, dosBtn, 0, SpringLayout.SOUTH, unoBtn);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, dosBtn, 0, SpringLayout.EAST, ochoBtn);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, dosBtn, 0, SpringLayout.WEST, ochoBtn);
+		dosBtn.setFont(new Font("SansSerif", Font.PLAIN, 11));
+		controlPanel.add(dosBtn);
+		
+		final JButton tresBtn = new JButton("3");
+		tresBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				validarEntrada(tresBtn.getText());
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, seisBtn, -2, SpringLayout.NORTH, tresBtn);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, tresBtn, 0, SpringLayout.SOUTH, unoBtn);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, tresBtn, 0, SpringLayout.EAST, nueveBtn);
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, tresBtn, 0, SpringLayout.NORTH, unoBtn);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, tresBtn, 0, SpringLayout.WEST, nueveBtn);
+		tresBtn.setFont(new Font("SansSerif", Font.PLAIN, 11));
+		controlPanel.add(tresBtn);
+		
+		final JButton ceroBtn = new JButton("0");
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, unoBtn, -2, SpringLayout.NORTH, ceroBtn);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, ceroBtn, 0, SpringLayout.EAST, ochoBtn);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, ceroBtn, 0, SpringLayout.WEST, sieteBtn);
+		ceroBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				validarEntrada(ceroBtn.getText());
+			}
+		});
+		ceroBtn.setFont(new Font("SansSerif", Font.PLAIN, 11));
+		controlPanel.add(ceroBtn);
+		
+		final JButton sumarBtn = new JButton("+");
+		sumarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				escribirOperacion(sumarBtn.getText());
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.WEST, sumarBtn, 163, SpringLayout.WEST, controlPanel);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, nueveBtn, -6, SpringLayout.WEST, sumarBtn);
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, sumarBtn, 49, SpringLayout.NORTH, controlPanel);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, sumarBtn, 0, SpringLayout.SOUTH, sieteBtn);
+		sumarBtn.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		sumarBtn.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		controlPanel.add(sumarBtn);
+		
+		final JButton restarBtn = new JButton("-");
+		restarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				escribirOperacion(restarBtn.getText());
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, restarBtn, 85, SpringLayout.NORTH, controlPanel);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, restarBtn, 6, SpringLayout.EAST, seisBtn);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, restarBtn, 0, SpringLayout.SOUTH, cuatroBtn);
+		restarBtn.setFont(new Font("SansSerif", Font.PLAIN, 18));
+		restarBtn.setAlignmentX(1.0f);
+		controlPanel.add(restarBtn);
+		
+		final JButton multiplicarBtn = new JButton("*");
+		multiplicarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				escribirOperacion(multiplicarBtn.getText());
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.WEST, multiplicarBtn, 6, SpringLayout.EAST, tresBtn);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, multiplicarBtn, 0, SpringLayout.SOUTH, unoBtn);
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, multiplicarBtn, 121, SpringLayout.NORTH, controlPanel);
+		multiplicarBtn.setFont(new Font("SansSerif", Font.PLAIN, 19));
+		multiplicarBtn.setAlignmentX(1.0f);
+		controlPanel.add(multiplicarBtn);
+		
+		final JButton dividirBtn = new JButton("/");
+		dividirBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				escribirOperacion(dividirBtn.getText());
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.WEST, dividirBtn, 57, SpringLayout.EAST, ceroBtn);
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, ceroBtn, 0, SpringLayout.NORTH, dividirBtn);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, ceroBtn, 0, SpringLayout.SOUTH, dividirBtn);
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, dividirBtn, 157, SpringLayout.NORTH, controlPanel);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, dividirBtn, -30, SpringLayout.SOUTH, controlPanel);
+		dividirBtn.setFont(new Font("SansSerif", Font.PLAIN, 18));
+		dividirBtn.setAlignmentX(1.0f);
+		controlPanel.add(dividirBtn);
+		
+		JButton igualBtn = new JButton("=");
+		igualBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String aux = display.getText().concat(inOutDisplay.getText());
+				Entrada entrada = new Entrada(aux);
+				
+				//Mostrar resultado de la logica
+				if(entrada.getPosicion() == -1){ 
+					inOutDisplay.setText("Error!!! División por cero");
+				}else{
+					//En caso de que el resultado sea entero se elimina el punto flotante del numero
+					if(entrada.getOperacion().controlador() - (int)entrada.getOperacion().controlador() == 0){
+						inOutDisplay.setText(Integer.toString((int)(entrada.getOperacion().controlador())));
+					}else{
+						inOutDisplay.setText(Double.toString(entrada.getOperacion().controlador()));
+					}
+				}
+				display.setText("");
+				Definiciones.operador = false;			
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.EAST, dividirBtn, -6, SpringLayout.WEST, igualBtn);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, multiplicarBtn, -6, SpringLayout.WEST, igualBtn);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, restarBtn, -6, SpringLayout.WEST, igualBtn);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, sumarBtn, -6, SpringLayout.WEST, igualBtn);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, igualBtn, 0, SpringLayout.SOUTH, ceroBtn);
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, igualBtn, 49, SpringLayout.NORTH, controlPanel);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, igualBtn, 220, SpringLayout.WEST, controlPanel);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, igualBtn, -7, SpringLayout.EAST, controlPanel);
+		igualBtn.setFont(new Font("SansSerif", Font.PLAIN, 10));
+		controlPanel.add(igualBtn);
+		
+		JButton borrarBtn = new JButton("");
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, borrarBtn, 9, SpringLayout.NORTH, controlPanel);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, borrarBtn, 0, SpringLayout.WEST, sieteBtn);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, borrarBtn, -6, SpringLayout.NORTH, sieteBtn);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, borrarBtn, -102, SpringLayout.EAST, nueveBtn);
+		borrarBtn.setIcon(new ImageIcon(MainApp.class.getResource("/gui/utils/images/Copia flecha1.png")));
+		borrarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!inOutDisplay.getText().isEmpty() && inOutDisplay.getText().length() != 1){
+					if(inOutDisplay.getText().charAt(inOutDisplay.getText().length()-1) == '.'){
+						Definiciones.cantPuntoFlotante = 0;
+					}					
+					String aux = inOutDisplay.getText().substring(0, inOutDisplay.getText().length()-1);
+					inOutDisplay.setText(aux);
+				}else{
+					inOutDisplay.setText("0");
+					Definiciones.cantPuntoFlotante = 0;
+				}
+			}
+		});
+		controlPanel.add(borrarBtn);
+		
+		JButton limpiarInOutDisplayBtn = new JButton("CE");
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, limpiarInOutDisplayBtn, 0, SpringLayout.NORTH, borrarBtn);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, limpiarInOutDisplayBtn, 0, SpringLayout.WEST, nueveBtn);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, limpiarInOutDisplayBtn, -6, SpringLayout.NORTH, nueveBtn);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, limpiarInOutDisplayBtn, -121, SpringLayout.EAST, controlPanel);
+		limpiarInOutDisplayBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				inOutDisplay.setText("0");
+				Definiciones.cantPuntoFlotante = 0;
+			}
+		});
+		limpiarInOutDisplayBtn.setFont(new Font("SansSerif", Font.PLAIN, 8));
+		controlPanel.add(limpiarInOutDisplayBtn);
+		
+		JButton cleanBtn = new JButton("C");
+		sl_controlPanel.putConstraint(SpringLayout.EAST, cleanBtn, -108, SpringLayout.EAST, sumarBtn);
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, cleanBtn, 0, SpringLayout.NORTH, borrarBtn);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, cleanBtn, 0, SpringLayout.WEST, ochoBtn);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, cleanBtn, -6, SpringLayout.NORTH, sumarBtn);
+		cleanBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				inOutDisplay.setText("0");
+				display.setText("");
+				Definiciones.operador = false;
+				Definiciones.cantPuntoFlotante = 0;
+			}
+		});
+		cleanBtn.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		controlPanel.add(cleanBtn);
+		
+		JButton puntoBtn = new JButton(".");
+		puntoBtn.setFont(new Font("SansSerif", Font.PLAIN, 20));
+		puntoBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Definiciones.cantPuntoFlotante == 0 /*&& Definiciones.nuevoNum*/){
+					inOutDisplay.setText(inOutDisplay.getText()+".");
+					Definiciones.cantPuntoFlotante++;
+				}
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, puntoBtn, 0, SpringLayout.NORTH, ceroBtn);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, puntoBtn, 6, SpringLayout.EAST, ceroBtn);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, puntoBtn, 0, SpringLayout.SOUTH, ceroBtn);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, puntoBtn, 0, SpringLayout.EAST, nueveBtn);
+		controlPanel.add(puntoBtn);
+		
+		final JButton negativoBtn = new JButton("+/-");
+		negativoBtn.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				negativoBtn.setToolTipText("Hacer número negativo");
+			}
+			public void mouseExited(MouseEvent e){
+				negativoBtn.setText("+/-");
+			}
+		});
+		negativoBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!inOutDisplay.getText().equals("0")){
+					
+					if(Double.parseDouble(inOutDisplay.getText()) - (int)Double.parseDouble(inOutDisplay.getText()) == 0){
+						int aux = (Integer.parseInt(inOutDisplay.getText()))*-1;
+						inOutDisplay.setText(String.valueOf(aux));
+					}else{
+						double aux = (Double.parseDouble(inOutDisplay.getText()))*-1;
+						inOutDisplay.setText(String.valueOf(aux));
+					}
+				}				
+			}
+		});
+		sl_controlPanel.putConstraint(SpringLayout.NORTH, negativoBtn, 0, SpringLayout.NORTH, borrarBtn);
+		sl_controlPanel.putConstraint(SpringLayout.WEST, negativoBtn, 0, SpringLayout.WEST, sumarBtn);
+		sl_controlPanel.putConstraint(SpringLayout.SOUTH, negativoBtn, -6, SpringLayout.NORTH, sumarBtn);
+		sl_controlPanel.putConstraint(SpringLayout.EAST, negativoBtn, 0, SpringLayout.EAST, sumarBtn);
+		negativoBtn.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		controlPanel.add(negativoBtn);
+				
+	}
+	
+	/**
+	 * Limita la cantidad de caracteres numericos a escribir en pantalla
+	 * @param el nombre del boton 
+	 */
+	public void validarEntrada(String btn){
+		if(inOutDisplay.getText().length() < 16){
+			escribirNum(btn);
+		}
+	}
+	
+	/**
+	 * Controla como se escribe el numero en pantalla
+	 * @param el nombre del boton 
+	 */
+	public void escribirNum(String btn){
+		if(inOutDisplay.getText().equals("0") || Definiciones.operador){
+			inOutDisplay.setText(btn);
+			Definiciones.operador = false;
+			//Definiciones.nuevoNum = true;
+			Definiciones.cantPuntoFlotante = 0;
+		}else{
+			inOutDisplay.setText(inOutDisplay.getText()+ btn);
+			//Definiciones.nuevoNum = false;
+		}
+		/*if(inOutDisplay.getText().equals("0") || Definiciones.operador){
+			inOutDisplay.setText(btn);
+			Definiciones.operador = false;
+			Definiciones.nuevoNum = true;
+			Definiciones.cantPuntoFlotante = 0;
+		}else{
+			inOutDisplay.setText(inOutDisplay.getText()+ btn);
+		}*/
+		/*if(inOutDisplay.getText().equals("0") || (Definiciones.operador && Definiciones.nuevoNum == 1)){
+			inOutDisplay.setText(btn);
+			if(!display.getText().isEmpty()){
+				if(Character.isDigit(display.getText().charAt(display.getText().length()-1))){
+					Definiciones.operador = false;
+				}else{
+					Definiciones.operador = true;
+				}
+			}		
+			
+			Definiciones.cantPuntoFlotante = 0;
+		}else{
+			inOutDisplay.setText(inOutDisplay.getText()+ btn);
+		}*/
+	}
+	
+	/**
+	 * Controla como se escribe el operador(+,-,*,/) en pantalla
+	 * @param el nombre del boton
+	 */
+	public void escribirOperacion(String btn){
+		if(!Definiciones.operador){
+			if(inOutDisplay.getText().lastIndexOf('.') == inOutDisplay.getText().length()-1){
+				display.setText(inOutDisplay.getText().substring(0, inOutDisplay.getText().length()-1) + btn);
+				inOutDisplay.setText(inOutDisplay.getText().substring(0, inOutDisplay.getText().length()-1));
+			}else{
+				display.setText(inOutDisplay.getText() + btn);
+			}	
+			Definiciones.operador = true;
+			//Definiciones.nuevoNum = true;
+			//Definiciones.cantPuntoFlotante = 0;
+		}else{
+			MensajesDeDialogo.masDeUnaOperacion();
+		}
+		/*if(!Definiciones.operador){
+			if(inOutDisplay.getText().lastIndexOf('.') == inOutDisplay.getText().length()-1){
+				display.setText(inOutDisplay.getText().substring(0, inOutDisplay.getText().length()-1) + btn);
+				inOutDisplay.setText(inOutDisplay.getText().substring(0, inOutDisplay.getText().length()-1));
+			}else{
+				display.setText(inOutDisplay.getText() + btn);
+			}	
+			Definiciones.operador = true;
+			Definiciones.cantPuntoFlotante = 0;
+		}else{
+			MensajesDeDialogo.masDeUnaOperacion();
+		}*/
+		/*if(!Definiciones.operador){
+			if(inOutDisplay.getText().lastIndexOf('.') == inOutDisplay.getText().length()-1){
+				display.setText(inOutDisplay.getText().substring(0, inOutDisplay.getText().length()-1) + btn);
+				inOutDisplay.setText(inOutDisplay.getText().substring(0, inOutDisplay.getText().length()-1));
+			}else{
+				display.setText(inOutDisplay.getText() + btn);
+			}	
+			Definiciones.operador = true;
+			Definiciones.nuevoNum++;
+			Definiciones.cantPuntoFlotante = 0;
+		}else{
+			MensajesDeDialogo.masDeUnaOperacion();
+		}*/
+	}
+}
